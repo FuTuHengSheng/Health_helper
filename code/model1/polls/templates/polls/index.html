@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+<meta charset="utf-8">
+<title> </title>
+</head>
+<body>
+<h1>{{contain}}</h1>
+<h1 style="font-family:verdana;">一个标题</h1>
+<p style="font-family:arial;color:red;font-size:20px;">一个段落。</p>
+<form name="input" action="store/" method="post">
+    {% csrf_token %}
+    <p>Username: <input type="text" name="user"></p>
+    <p>ID: <input type="text" name="ID"></p>
+    <p><input type="radio" name="sex" value="male">男<br></p>
+    <p><input type="radio" name="sex" value="female">女</p>
+    <p>temperature1: <input type="text" name="td1"></p>
+    <p>temperature2: <input type="text" name="td2"></p>
+    <p>heartbeat1: <input type="text" name="hd1"></p>
+    <p>heartbeat2: <input type="text" name="hd2"></p>
+    <p><input type="submit" value="Submit"></p>
+</form>
+</body>
+</html>
