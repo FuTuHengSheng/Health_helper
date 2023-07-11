@@ -1,0 +1,13 @@
+li a {
+    color: green;
+    background-color: aquamarine;
+    border-color: hsl(240, 40%, 67%);
+}
+
+/* 这是一行单行注释 */
+
+body {
+    background: white url("images/高温.png") no-repeat;
+    height: 95%;
+    bottom: 100%;
+}
