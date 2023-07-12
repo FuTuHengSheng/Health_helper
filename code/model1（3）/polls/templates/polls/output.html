@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+<li><span>维度一</span></li>
+<li><span>维度二</span></li>
+<li><span>维度三</span></li>
+<li><span>维度四</span></li>
+<li><span>维度五</span></li>
+</ul>
+<canvas id="radar-chart" width="500" height="500"></canvas>
+<script>
+var canvas = document.getElementById("radar-chart");
+var ctx = canvas.getContext("2d");
+</script>
+<script>
+var canvas = document.getElementById("radar-chart");
+var ctx = canvas.getContext("2d");
+var data = [50,60,40,70,80];
+var labels = ["维度一","维度二","维度三","维度四","维度五"];
+var steps = 5;
+//绘制雷达图
+ctx.beginPath();
+var angle = Math.PI * 2 / labels.length;
+for (var i = 0; i < labels.length; i++) {
+var x = canvas.width / 2 + Math.cos(angle * i - Math.PI / 2) * canvas.width / 2 * (data[i]/steps);
+var y = canvas.height / 2 + Math.sin(angle * i - Math.PI / 2) * canvas.height / 2 * (data[i]/steps);
+if (i == 0) {
+ctx.moveTo(x, y);
+} else {
+ctx.lineTo(x, y);
+}
+ctx.fillText(labels[i], x + 10, y + 10);
+}
+ctx.closePath();
+ctx.stroke();
+</script>
+{{name}}
+
+</body>
+</html>
