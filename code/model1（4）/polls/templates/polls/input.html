@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="input" action="store" method="post">
+    {% csrf_token %}
+    <p>temperature1: <input type="text" name="td1"></p>
+    <p>temperature2: <input type="text" name="td2"></p>
+    <p>heartbeat1: <input type="text" name="hd1"></p>
+    <p>heartbeat2: <input type="text" name="hd2"></p>
+    <p><input type="submit" value="Submit"></p>
+</form>
+</body>
+</html>
