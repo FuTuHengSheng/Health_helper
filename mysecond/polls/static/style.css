@@ -1,0 +1,17 @@
+li a {
+    color: green;
+    background-color: aquamarine;
+    border-color: hsl(240, 40%, 67%);
+}
+
+/* 这是一行单行注释 */
+
+body {
+    background: white url("images/future.jpg") no-repeat;
+    height: 100%;
+    bottom: 100%;
+    width: 150%;
+}
+
+img{height: auto; width: auto\9; width:100%;}
+
