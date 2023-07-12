@@ -4,6 +4,8 @@ def get_radar_figure(results):
     import io
     from django.http import HttpResponse
 
+    plt.rcParams["font.sans-serif"]=["SimHei"]
+    plt.rcParams["axes.unicode_minus"]=False 
     data_length = len(results[0])
     angles = np.linspace(0, 2*np.pi, data_length, endpoint=False)
     labels = [key for key in results[0].keys()]
