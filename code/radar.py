@@ -15,7 +15,7 @@ def get_radar_figure(results):
     fig.suptitle("健康雷达图")
     ax1 = plt.subplot(121, polar=True)
     ax, data, name = [ax1], [data_now], ["Username"]
-    for i in range(len(results):
+    for i in range(len(results)):
         for j in np.arange(0, 100+20, 20):
             ax[i].plot(angles, (data_length + 1)*[j], '-.', lw=0.5, color='black')
         for j in range(data_length):
