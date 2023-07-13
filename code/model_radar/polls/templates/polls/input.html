@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="input" action="store" method="post">
+    {% csrf_token %}
+    <p>收缩压(mmHg): <input type="text" name="td1"></p>
+    <p>舒张压(mmHg): <input type="text" name="td2"></p>
+    <p>空腹血糖(mg/dL): <input type="text" name="td3"></p>
+    <p>每周运动时间(min): <input type="text" name="hd1"></p>
+    <p>身高(m): <input type="text" name="hd2"></p>
+    <p>体重(kg): <input type="text" name="hd3"></p>
+    <p><input type="submit" value="Submit"></p>
+</form>
+</body>
+</html>

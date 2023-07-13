@@ -1,0 +1,26 @@
+body {
+    background: white url("images/background.png") no-repeat;
+}
+<style>
+canvas {
+background-color: #fff;
+border: 1px solid #ccc;
+}
+ul {
+margin: 0;
+padding: 0;
+list-style: none;
+}
+li {
+display: inline-block;
+width: 80px;
+height: 30px;
+line-height: 30px;
+text-align: center;
+margin-right: 20px;
+background-color: #eee;
+}
+li span {
+font-weight: bold;
+}
+</style>
