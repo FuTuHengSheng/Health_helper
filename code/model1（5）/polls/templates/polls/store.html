@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+<meta charset="utf-8">
+<title> </title>
+    <style>
+.center {
+    margin-left: auto;
+    margin-top: 200px;
+    margin-bottom: auto;
+    margin-right: auto;
+    width: 60%;
+    padding: 20px;
+    border-color: black;
+    background:	rgb(248,248,248,0.4);
+    }
+a {font-size:40px;}
+</style>
+</head>
+<body>
+<div class='center'>
+    <p>生成报告中，点击领取你的健康数据吧！</p>>
+    <a href="{% url 'output' users.Users_id %}">雷达图！</a>
+
+    </div>
+</body>
+</html>
