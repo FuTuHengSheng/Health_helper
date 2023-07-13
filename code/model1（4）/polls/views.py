@@ -13,7 +13,12 @@ def input(request,Users_id):
     return render(request, "polls/input.html", {'contain':contain})
 
 def output(request,Users_id):
-    response=get_radar_figure([{"血压":111,"血糖":222,"avc":333,"dads":156,"HDAH":115,"JH":895}])
+    m=Users.objects.get(pk=Users_id)
+    systolic = m.t_datas_set.filter()[0].td
+    diastolic = m.t_datas_set.filter()[1].td
+    blood_pressure_index = (systolic - diastolic) / diastolic
+    bmi = m.h_datas_set.filter()[2].hd / (m.h_datas_set.filter()[1].hd * m.h_datas_set.filter()[1].hd)
+    response=get_radar_figure([{"收缩压":systolic,"舒张压":diastolic,"空腹血糖":m.t_datas_set.filter()[2].td,"运动强度":(m.h_datas_set.filter()[0].hd)/2,"BMI":bmi*4}])
     return response
     '''name=al(Users_id)
     return render(request,"polls/output.html",{'name':name})'''
@@ -26,6 +31,7 @@ def store(request,Users_id):
         return render(request, "polls/store.html", {'users':users})
     else:
         return HttpResponse("Wrong!")
+    
 def op_users(request):
     m=Users()
     m.Users_name=request.POST.get("user","")
@@ -33,16 +39,19 @@ def op_users(request):
     m.Users_gender=request.POST.get("sex","")
     m.Password=request.POST.get("password","")
     m.save()
+
 def op_t_datas(request,Users_id):
     m=Users.objects.get(pk=Users_id)
     m.t_datas_set.create(td=request.POST.get("td1",""))
     m.t_datas_set.create(td=request.POST.get("td2", ""))
+    m.t_datas_set.create(td=request.POST.get("td3", ""))
     m.save()
 
 def op_h_datas(request,Users_id):
     m=Users.objects.get(pk=Users_id)
     m.h_datas_set.create(hd=request.POST.get("hd1",""))
     m.h_datas_set.create(hd=request.POST.get("hd2", ""))
+    m.h_datas_set.create(hd=request.POST.get("hd3", ""))
     m.save()
 
 def login(request):
@@ -63,6 +72,7 @@ def login(request):
                 return render(request, 'polls/login.html', {"error": "用户名或密码输入错误,请重新尝试"})
         except:
             return render(request, 'polls/login.html', {"error": "用户名或密码输入错误,请重新尝试"})
+        
 def register(request):
     if request.method=='POST':
         m = Users()
@@ -81,39 +91,33 @@ def get_radar_figure(results):
     import io
     from django.http import HttpResponse
 
+    results = [{"收缩压":90,"舒张压":60,"空腹血糖":70,"运动强度":37.5,"BMI":18.5*4},{"收缩压":130,"舒张压":90,"空腹血糖":100,"运动强度":200,"BMI":25*4}] + results
     plt.rcParams["font.sans-serif"]=["SimHei"]
     plt.rcParams["axes.unicode_minus"]=False
     data_length = len(results[0])
+
     angles = np.linspace(0, 2*np.pi, data_length, endpoint=False)
     labels = [key for key in results[0].keys()]
     result_data = [[v for v in result.values()] for result in results]
-    data_now = np.concatenate((result_data[0], [result_data[0][0]]))
     angles = np.concatenate((angles, [angles[0]]))
     labels = np.concatenate((labels, [labels[0]]))
     fig = plt.figure(figsize=(10, 6), dpi=100)
-    fig.suptitle("健康雷达图")
-    ax1 = plt.subplot(121, polar=True)
-    ax, data, name = [ax1], [data_now], ["Username"]
+    ax = plt.subplot(111, polar=True)
+    color_ = ['r','g','b']
     for i in range(len(results)):
-        for j in np.arange(0, 100+20, 20):
-            ax[i].plot(angles, (data_length + 1)*[j], '-.', lw=0.5, color='black')
-        for j in range(data_length):
-            ax[i].plot([angles[j], angles[j]], [0, 1000], '-.', lw=0.5, color='black')
-        ax[i].plot(angles, data[i], color='b')
-        ax[i].spines['polar'].set_visible(False)
-        ax[i].grid(False)
-        for a, b in zip(angles, data[i]):
-            ax[i].text(a, b+5, '%.00f' % b, ha='center', va='center', fontsize=12, color='b')
-        ax[i].set_thetagrids(angles*180/np.pi, labels)
-        ax[i].set_theta_zero_location('N')
-        ax[i].set_rlim(0, 1000)
-        ax[i].set_rlabel_position(0)
-        ax[i].set_title(name[i])
+        data_now = np.concatenate((result_data[i], [result_data[i][0]]))
+        ax.plot(angles, data_now, color=color_[i])
 
+    ax.set_thetagrids(angles*180/np.pi, labels)
+    ax.set_theta_zero_location('N')
+    ax.set_rlim(0, 200)
+    ax.set_rlabel_position(270)
+    ax.set_title("健康雷达图")
+    plt.legend(["标准下限","标准上限","用户数据"], loc='best')
+    plt.yticks(color='w')
     buf = io.BytesIO()
     fig.savefig(buf, format='png')
     plt.close(fig)
     fig_data=buf.getvalue()
     response = HttpResponse(fig_data, content_type='image/png')
     return response
-# Create your views here.

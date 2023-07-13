@@ -10,11 +10,11 @@ class Users(models.Model):
         return self.Users_name
 class T_Datas(models.Model):
     users=models.ForeignKey(Users,on_delete=models.CASCADE)
-    td=models.DecimalField(max_digits=4,decimal_places=2)
+    td=models.DecimalField(max_digits=10,decimal_places=2)
     def __str__(self):
         return str(self.td)
 class H_Datas(models.Model):
     users = models.ForeignKey(Users, on_delete=models.CASCADE)
-    hd = models.DecimalField(max_digits=4, decimal_places=2)
+    hd = models.DecimalField(max_digits=10, decimal_places=2)
     def __str__(self):
         return str(self.hd)
