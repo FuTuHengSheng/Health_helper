@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .center {
+    margin-left: auto;
+    margin-top: 200px;
+    margin-bottom: auto;
+    margin-right: auto;
+    width: 60%;
+    padding: 20px;
+    border-color: black;
+    background:	rgb(248,248,248,0.5);
+    }
+    </style>
+</head>
+<body>
+  <div class='center'>
+        <script>
+        var data=[{% for yy in users%}{{yy}},{% endfor%}];
+        var systolic=data[0];
+        var diastolic=data[1];
+        document.write("收缩压标准值为90-130"+"<br>");
+        document.write("收缩压标准值为60-90"+"<br>");
+        document.write("你的收缩压为"+String(systolic)+"<br>");
+        document.write("你的舒张压为"+String(diastolic)+"<br>");
+        if(systolic > 130 && diastolic > 90){
+            document.write("高血压,"+"您的血压指数较高，需要注意血压管理。"+"<br>");
+            document.write("①减轻并控制体重。②减少钠盐摄入。③补充钙和钾盐。④减少脂肪摄入。⑤增加运动。⑥戒烟、限制饮酒。⑦减轻精神压力，保持心理平衡"+"<br>");
+        }
+
+        else if(systolic < 90 && diastolic < 60){
+            document.write("低血压,"+"您的血压指数较低，需要关注是否存在低血压的症状。"+"<br>");
+            document.write("这边建议您每日清晨可饮些淡盐开水！"+"<br>");
+        }
+        else{
+            document.write("正常血压,"+"您的血压指数正常。"+"<br>");
+        }
+        var yd=data[3];
+        document.write("运动强度标准值为37.5-200"+"<br>");
+        document.write("你的运动强度为"+String(yd)+"<br>");
+        if(yd<37.5){
+            document.write("如果您再这样下去，您的裤子可能会向您道歉，因为它们已经无法容纳您的身材了。"+"<br>");
+        }
+        else if(yd<200){
+            document.write("你已经进行了一些运动了，你感觉怎么样？是不是感觉更加健康和自信了？"+"<br>");
+        }
+        else{
+            document.write("运动强度有一点大哟。"+"<br>");
+        }
+        var bmi=data[4];
+        document.write("你的BMI为"+ String(bmi) + "<br>");
+        document.write("BIM标准值为18.5-25"+"<br>");
+        var ideal_bmi=0;
+        if(data[5]){
+            ideal_bmi=22;
+        }
+        else{
+            ideal_bmi=19;
+        }
+        var result = ""
+        if(bmi < 18.5){
+            result = "BMI值过低,建议适当增加饮食和运动。";
+            document.write(result+"<br>"+"您的骨架可能比较轻，如果您不是运动员，建议多吃点好的，增肥一点点也无妨。");}
+        else if(bmi < 25){
+            result = "BMI值正常,继续保持良好的生活习惯。";
+            document.write(result+"<br>"+"你简直太完美了，叫你一声健身达人不为过吧。");}
+        else if(bmi < 30){
+            result = "BMI值偏高,建议适当控制饮食并增加运动量。";
+            document.write(result+"<br>"+"如果你继续这样下去，你的体重将会比你的薪水还要高。");}
+        else if(bmi < 35){
+            result = "BMI值较高,建议寻求医生的帮助并进行相应的减重治疗。";
+            document.write(result+"<br>"+"你的脂肪比你的肌肉还要多。");}
+        else if(bmi < 40){
+            result = "BMI值很高,存在较高的健康风险,建议立即寻求医生的帮助。";
+            document.write(result);}
+        else{
+            result = "BMI值过高,属于三类肥胖,存在极高的健康风险,建议立即寻求医生的帮助。";
+            document.write(result);}
+        </script>
+  </div>
+</body>
+</html>
