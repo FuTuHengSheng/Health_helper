@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    <title>科技风格网页</title>
+    <style>
+    .center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+    background:	rgb(248,248,248,0.5);
+    }
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+
+  </head>
+  <body>
+  <div class="center">
+    <header>
+      <h1>健康同行</h1>
+      <nav>
+        <ul>
+          <li><a href="#">首页</a></li>
+          <li><a href="{% url 'login' %}">产品</a></li>
+          <li><a href="{% url 'aboutus' %}">关于我们</a></li>
+          <li><a href="#">联系我们</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2>我们的使命</h2>
+        <p>我们致力于通过观测你的每一秒，将健康变为现实。</p>
+      </section>
+      <section>
+        <h2>我们的产品</h2>
+        <ul>
+          <li>产品 1</li>
+          <li>产品 2</li>
+          <li>产品 3</li>
+        </ul>
+      </section>
+      <section>
+        <h2>联系我们</h2>
+        <p>如果您有任何问题或疑虑，请随时联系我们。</p>
+        <ul>
+          <li><a href="#">电话号码</a></li>
+          <li><a href="#">电子邮件</a></li>
+          <li><a href="#">社交媒体</a></li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2023 健康同行 all rights reserved</p>
+    </footer>
+  </div>
+  </body>
+</html>

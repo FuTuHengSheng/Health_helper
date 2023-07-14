@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+        <style>
+            .login-box{
+                    width: 400px;
+                    height: 280px;
+                    margin-left: auto;
+                    margin-top: 200px;
+                    margin-bottom: auto;
+                    margin-right: auto;
+                    border: 1px solid #ddd;
+                    padding: 20px;
+                    border-color: black;
+                    background:	rgb(248,248,248,0.4);
+                }
+            .login-box h2{
+                    text-align: center;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+            .form-group{
+                width: auto;
+                text-align:left;
+            }
+            .submit{
+                text-align: center;
+                padding-top: 35px;
+                bottom: 100px;
+                height: 10px;
+            }
+            .myone{
+                background-color:rgb(204, 231, 231);
+            }
+        </style>
+</head>
+<body class = "myone">
+<div class ="login-box">
+
+    <h2>用户登录</h2>
+
+    <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group">
+
+           <h4> <label>用户名</label></h4>
+
+            <input type="text" class="form-control"   placeholder="请输入用户名" name = "user">
+            </div>
+        <div class="form-group">
+
+            <h4><label>密码</label></h4>
+
+            <input type="password" class="form-control"  placeholder="请输入密码" name = "pwd">    
+        </div>
+            <div class ="submit">
+            <button type="submit" class="btn btn-primary">提 交</button>
+            <span style = "color: red;">{{error}} </span>
+            </div>
+            <a href="{% url 'register'%}">注册</a>
+    </form> 
+</div>
+
+</body>
+</html>     

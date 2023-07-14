@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    .center {
+    margin-left: auto;
+    margin-top: 200px;
+    margin-bottom: auto;
+    margin-right: auto;
+    width: 50%;
+    padding: 20px;
+    border-color: black;
+    background:	rgb(248,248,248,0.4);
+    }
+
+    </style>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+<meta charset="utf-8">
+<title> </title>
+</head>
+<body>
+<div class="center">
+<form name="input" action="" method="post">
+    {% csrf_token %}
+    <p>Username: <input type="text" name="user"></p>
+    <p>Password: <input type="text" name="password"></p>
+    <p><input type="radio" name="sex" value="male">男<br></p>
+    <p><input type="radio" name="sex" value="female">女</p>
+    <p><input type="submit" value="Submit"></p>
+</form>
+</div>
+</body>
+</html>
